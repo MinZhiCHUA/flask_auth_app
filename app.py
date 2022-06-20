@@ -1,3 +1,4 @@
+# This file had to be in the folder of the project
 from project import app
 
 if __name__=="__main__":

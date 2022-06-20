@@ -1,6 +1,10 @@
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager
+import os
+from dotenv import load_dotenv
+
+load_dotenv()
 
 # init SQLAlchemy so we can use it later in our models
 db = SQLAlchemy()
@@ -8,8 +12,13 @@ db = SQLAlchemy()
 # def create_app():
 app = Flask(__name__)
 
-app.config['SECRET_KEY'] = 'secret-key-goes-here'
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///db.sqlite'
+# app.config['SECRET_KEY'] = 'secret-key-goes-here'
+# app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///db.sqlite'
+
+app.config["SECRET_KEY"] = os.getenv("SECRET_KEY")
+app.config["SQLALCHEMY_DATABASE_URI"] = os.getenv("SQLALCHEMY_DATABASE_URI")
+# app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
+# app.config["WTF_CSRF_SECRET_KEY"] = os.getenv("WTF_CSRF_SECRET_KEY")
 
 db.init_app(app)
 
