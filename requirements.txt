@@ -3,4 +3,3 @@ flask-wtf == 1.0.0
 flask_sqlalchemy
 flask_login
 Werkzeug==2.0.2
-os
