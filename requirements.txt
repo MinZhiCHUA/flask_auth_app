@@ -1,5 +1,5 @@
-python
-flask
+flask == 2.0.3
+flask-wtf == 1.0.0
 flask_sqlalchemy
 flask_login
-werkzeug
+Werkzeug==2.0.2
