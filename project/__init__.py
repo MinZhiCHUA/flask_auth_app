@@ -5,7 +5,7 @@ import os
 from dotenv import load_dotenv
 
 
-from applicationinsights.flask.ext import AppInsights
+# from applicationinsights.flask.ext import AppInsights
 
 load_dotenv()
 
@@ -25,14 +25,14 @@ app.config["SQLALCHEMY_DATABASE_URI"] = os.getenv("SQLALCHEMY_DATABASE_URI")
 
 # =======================================================
 # mz added these trying to connect to the insight
-app.config['APPINSIGHTS_INSTRUMENTATIONKEY'] = '9fc0b1a2-8f7f-472e-b889-e346889e4218'
-appinsights = AppInsights(app)
+# app.config['APPINSIGHTS_INSTRUMENTATIONKEY'] = '9fc0b1a2-8f7f-472e-b889-e346889e4218'
+# appinsights = AppInsights(app)
 
-# force flushing application insights handler after each request
-@app.after_request
-def after_request(response):
-    appinsights.flush()
-    return response
+# # force flushing application insights handler after each request
+# @app.after_request
+# def after_request(response):
+#     appinsights.flush()
+#     return response
 # =======================================================
 
 db.init_app(app)
