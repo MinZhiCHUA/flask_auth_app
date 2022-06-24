@@ -1,6 +1,9 @@
 from flask_login import UserMixin
 from . import db
 
+# def add_func (a,b):
+#     return a + b
+
 class User(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True) # primary keys are required by SQLAlchemy
     email = db.Column(db.String(100), unique=True)
