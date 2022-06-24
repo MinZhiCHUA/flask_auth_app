@@ -5,5 +5,4 @@ flask_login
 Werkzeug==2.0.2
 python-dotenv
 pytest
-
-# logging
+applicationinsights
