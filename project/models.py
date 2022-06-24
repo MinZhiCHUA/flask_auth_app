@@ -3,7 +3,7 @@ from flask_authorize import RestrictionsMixin, AllowancesMixin
 from flask_authorize import PermissionsMixin
 
 from . import db
-from .models import 
+
 
 
 def add_func (a,b):
