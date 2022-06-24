@@ -1,8 +1,11 @@
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager
+from flask_authorize import Authorize
 import os
 from dotenv import load_dotenv
+
+# import logging
 
 
 from applicationinsights.flask.ext import AppInsights
@@ -44,6 +47,11 @@ def after_request(response):
 
 
 # =======================================================
+# Trying authorization
+authorize = Authorize(app)
+
+# =======================================================
+
 
 db.init_app(app)
 

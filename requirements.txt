@@ -6,3 +6,7 @@ Werkzeug==2.0.2
 python-dotenv
 pytest
 applicationinsights
+flask-authorize
+flask-principal
+flask-rbac
+flask-security
