@@ -48,7 +48,7 @@ def after_request(response):
 
 # =======================================================
 # Trying authorization
-authorize = Authorize(app)
+app_authorization = Authorize(app)
 
 # =======================================================
 

@@ -1,10 +1,18 @@
 from flask import Blueprint, render_template, redirect, url_for, request, flash
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import login_user, login_required, logout_user
-from .models import User
+
+from flask_sqlalchemy import SQLAlchemy
+# from flask_security import SQLAlchemyUserDatastore
+
+from .models import User, Role, UserRole
 from . import db
 
 auth = Blueprint('auth', __name__)
+
+# Setup Flask-Security
+# user_datastore = SQLAlchemyUserDatastore(db, User, Role)
+# security = Security(app, user_datastore)
 
 @auth.route('/login')
 def login():
@@ -36,7 +44,8 @@ def signup():
 @auth.route('/signup', methods=['POST'])
 def signup_post():
     # code to validate and add user to database goes here
-
+    # role_user = Role.query.all(name="user")
+    # print(role_user)
     email = request.form.get('email')
     name = request.form.get('name')
     password = request.form.get('password')
@@ -48,10 +57,19 @@ def signup_post():
         return redirect(url_for('auth.signup'))
 
     # create a new user with the form data. Hash the password so the plaintext version isn't saved.
-    new_user = User(email=email, name=name, password=generate_password_hash(password, method='sha256'))
+    # new_user = user_datastore.create_user(email=email, name=name, password=generate_password_hash(password, method='sha256'))
+    # new_user.role = "user"
+    # user.active = True
+    role=1 # 1: user, 2:admin
+    new_user = User(email=email, name=name, password=generate_password_hash(password, method='sha256'), roles=[Role.query.get(int(role))],)
+    # new_user_role = UserRole(user_id= new_user.id, role_id = 1)
+    # new_user.roles.append(role_user)
+    # new_user.roles = ["user"]
+    # new_user.
 
     # add the new user to the database
     db.session.add(new_user)
+    # db.session.add(new_user_role)
     db.session.commit()
 
     return redirect(url_for('auth.login'))
