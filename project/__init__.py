@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, g
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager
 from flask_authorize import Authorize
@@ -48,8 +48,18 @@ def after_request(response):
 
 # =======================================================
 # Trying authorization
-app_authorization = Authorize(app)
 
+def my_current_user():
+    """
+    Return current user to check authorization against.
+    """
+    return g.user
+
+app_authorization = Authorize(
+    current_user=my_current_user,
+    # exception=MyUnauthorizedException,
+    strict=False,)
+app_authorization.init_app(app)
 # =======================================================
 
 

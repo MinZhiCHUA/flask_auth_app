@@ -3,5 +3,10 @@
 {% block content %}
 <h1 class="title">
   Welcome, {{ name }}!
+  {% if isadmin == True %}
+    <div>This is super secret content only for admin</div>
+  {% else %}
+  <div>Hey hey hey you are just a regular user</div>
+{% endif %}
 </h1>
 {% endblock %}

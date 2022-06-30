@@ -1,4 +1,5 @@
 from flask_login import UserMixin
+# from flask_user import UserMixin # This has the function _has_role
 from flask_authorize import RestrictionsMixin, AllowancesMixin
 from flask_authorize import PermissionsMixin
 
@@ -23,14 +24,18 @@ UserRole = db.Table(
     db.Column('role_id', db.Integer, db.ForeignKey('roles.id'))
 )
 
-class User(UserMixin, db.Model):
+class User(db.Model, UserMixin):
     __tablename__ = 'users'
 
     id = db.Column(db.Integer, primary_key=True) # primary keys are required by SQLAlchemy
     email = db.Column(db.String(100), unique=True)
     password = db.Column(db.String(100))
     name = db.Column(db.String(1000))
-    roles = db.relationship('Role', secondary=UserRole)
+    roles = db.relationship('Role', secondary=UserRole, backref=db.backref("user", lazy="dynamic"))
+
+    # Or we can use this method from flask_user import UserMixin # This has the function _has_role
+    def has_roles(self, *args):
+        return set(args).issubset({role.name for role in self.roles})
 
 
 # ========================================================
@@ -50,7 +55,7 @@ class User(UserMixin, db.Model):
 
 
 
-class Role(AllowancesMixin, db.Model):
+class Role(db.Model, AllowancesMixin):
     __tablename__ = 'roles'
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(255), nullable=False, unique=True)
