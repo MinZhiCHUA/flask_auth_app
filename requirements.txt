@@ -11,5 +11,4 @@ flask-authorize
 flask-principal
 flask-rbac
 flask-security
-flask-user
 email-validator
