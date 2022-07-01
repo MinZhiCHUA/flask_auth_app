@@ -12,3 +12,5 @@ flask-principal
 flask-rbac
 flask-security
 email-validator
+selenium
+webdriver_manager
