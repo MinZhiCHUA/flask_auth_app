@@ -5,9 +5,11 @@ flask_login
 Werkzeug==2.0.2
 python-dotenv
 pytest
+pytest-cov
 applicationinsights
 flask-authorize
 flask-principal
 flask-rbac
 flask-security
+flask-user
 email-validator
